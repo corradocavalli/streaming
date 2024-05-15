@@ -1,5 +1,5 @@
 {
-  "name": "dataingest-devcontainer",
+  "name": "llm_streaming-devcontainer",
   "context": ".",
   "dockerFile": "Dockerfile",
 
