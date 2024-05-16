@@ -66,14 +66,12 @@ async def stream_response(query: str):
  
     # Dequeues the messages queued by call_llm until the session is closed
     while True:
-        data = streaming_session.begin_read()
+        data = streaming_session.read()
         if data:
-            if data == StreamingSession.STOP:
-                streaming_session.end_read()
+            if data == StreamingSession.STOP:                
                 break
             else:
                 yield data
-                streaming_session.end_read()
  
         await asyncio.sleep(0.01)
 

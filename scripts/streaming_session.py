@@ -22,8 +22,5 @@ class StreamingSession:
         """
         self._queue.put(self.STOP)
  
-    def begin_read(self):        
+    def read(self):        
         return self._queue.get() if not self._queue.empty() else None
- 
-    def end_read(self):        
-        self._queue.task_done()
