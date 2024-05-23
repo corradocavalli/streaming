@@ -36,6 +36,8 @@ def load_documents(session: StreamingSession):
 def call_llm(query: str, session: StreamingSession):    
     session.write_message("Hey there! I am your AI assistant.\n")
     
+    load_documents(session)
+    
     try:
         response = client.chat.completions.create(
         model=deployment,    
@@ -46,8 +48,6 @@ def call_llm(query: str, session: StreamingSession):
         temperature=0,
         stream=True)
         
-        load_documents(session)
-
         for chunk in response:        
             if len(chunk.choices) > 0:
                 delta = chunk.choices[0].delta

@@ -33,6 +33,10 @@ def load_documents():
     
 # Handles the user query and returns the response chunks
 def stream_response(query: str):
+    
+    for doc in load_documents():
+        yield doc
+    
     response = client.chat.completions.create(
     model=deployment,    
     messages = [
@@ -41,9 +45,6 @@ def stream_response(query: str):
         ],
     temperature=0,
     stream=True)
-    
-    for doc in load_documents():
-        yield doc
 
     for chunk in response:        
         if len(chunk.choices) > 0:
